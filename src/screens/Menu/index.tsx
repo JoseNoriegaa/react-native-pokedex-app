@@ -134,12 +134,13 @@ const MenuScreen: React.FC = () => {
               showAnimatedLine={false}
             />
 
-            <CancelButton>
+            <CancelButton
+              onPress={() => setShowQrReader(false)}
+            >
               <Icon
                 name="ios-close-circle-outline"
                 size={30}
                 color="#fff"
-                onPress={() => setShowQrReader(false)}
               />
             </CancelButton>
           </RNCamera>
@@ -179,7 +180,7 @@ const CameraContainer = styled.View`
   background-color: #ffffff;
 `;
 
-const CancelButton = styled.View`
+const CancelButton = styled.TouchableOpacity`
   position: absolute;
   top: 10px;
   right: 10px;
