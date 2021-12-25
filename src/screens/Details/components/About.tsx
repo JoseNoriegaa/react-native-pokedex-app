@@ -31,7 +31,7 @@ const About: React.FC<AboutProps> = ({
         </FieldName>
 
         <Value>
-          { pokemon.height }
+          { pokemon.height / 100 }
           { ' ' }
           meters.
         </Value>
@@ -43,7 +43,7 @@ const About: React.FC<AboutProps> = ({
         </FieldName>
 
         <Value>
-          { pokemon.weight }
+          { pokemon.weight / 100 }
           { ' ' }
           kilograms.
         </Value>

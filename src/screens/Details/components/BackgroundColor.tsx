@@ -22,6 +22,7 @@ const BackgroundColor: React.FC<BackgroundColorProps> = ({
   const styles = useAnimatedStyle(() => ({
     backgroundColor: color,
     height: contentOffset + 20 + (scrollY.value * -1),
+    zIndex: -1,
   }), [contentOffset, color]);
 
   return (

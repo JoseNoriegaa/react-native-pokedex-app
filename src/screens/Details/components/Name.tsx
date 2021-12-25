@@ -13,7 +13,7 @@ import { Type, TypeContainer } from '../../Menu/components/Pokemon';
 import { WINDOW_WIDTH } from '../../../utils/constants';
 
 interface NameProps {
-  id: string;
+  id: string | number;
   name: string;
   types: { name: string }[];
   genus: string;

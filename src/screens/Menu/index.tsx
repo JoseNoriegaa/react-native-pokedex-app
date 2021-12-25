@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   FlatList,
 } from 'react-native';
@@ -27,6 +27,7 @@ const MenuScreen: React.FC = () => {
   // State
   const [limit, setLimit] = useState<number>(20);
   const [showQrReader, setShowQrReader] = useState<boolean>(false);
+  const [pokemonList, setPokemonList] = useState<PokemonProps[]>([]);
 
   // Hooks
   const navigation = useNavigation<MenuScreenNavigationProp>();
@@ -37,7 +38,19 @@ const MenuScreen: React.FC = () => {
       limit,
     },
   });
-  const pokemons = data?.results ?? [];
+
+  // Effects
+  useEffect(() => {
+    if (data && Array.isArray(data?.results)) {
+      const copy = [
+        ...pokemonList,
+        ...data.results.slice(pokemonList.length, data.results.length),
+      ];
+
+      setPokemonList(copy);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   // Methods
   const goToDetails = (pokemon: PokemonProps) => {
@@ -50,7 +63,7 @@ const MenuScreen: React.FC = () => {
     const regexp = /^[0-9]+$/;
 
     if (regexp.test(qrData)) {
-      const pokemon = pokemons.find((p) => p.id === Number(qrData));
+      const pokemon = pokemonList.find((p) => p.id === Number(qrData));
 
       if (pokemon) {
         setShowQrReader(false);
@@ -75,7 +88,7 @@ const MenuScreen: React.FC = () => {
             paddingHorizontal: 10,
             paddingBottom: insets.bottom,
           }}
-          data={pokemons}
+          data={pokemonList}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item: pokemon, index }) => (
             <Pokemon
@@ -94,6 +107,7 @@ const MenuScreen: React.FC = () => {
           numColumns={2}
           onEndReached={() => setLimit((v) => v + 20)}
           onEndReachedThreshold={0.5}
+          initialNumToRender={20}
         />
 
         <CameraButton
