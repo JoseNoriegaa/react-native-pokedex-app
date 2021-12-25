@@ -9,6 +9,7 @@ interface Pokemon {
   height: number;
   weight: number;
   gender_rate: number;
+  generation: string;
   base_stats: {
     hp: number;
     attack: number;
@@ -25,6 +26,15 @@ interface Pokemon {
   }[];
   egg_groups: {
     name: string;
+  }[];
+  locations: null | {
+    name: string;
+    region: {
+      name: string;
+    };
+    games: {
+      name: string;
+    }[];
   }[];
 }
 

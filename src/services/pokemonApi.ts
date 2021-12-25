@@ -10,6 +10,7 @@ const getAllPokemonQuery = gql`
       height
       weight
       gender_rate
+      generation
       base_stats {
         hp
         attack
@@ -29,6 +30,15 @@ const getAllPokemonQuery = gql`
       }
       egg_groups {
         name
+      }
+      locations {
+        name
+        region {
+          name
+        }
+        games {
+          name
+        }
       }
     }
   }
